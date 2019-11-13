@@ -1,0 +1,67 @@
+<html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+  body{
+    background: url('https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?ixlib=rb-1.2.1&w=1000&q=80');
+    background-repeat: no-repeat;
+    background-size: cover  ;
+    background-position: center;
+  }
+  h2 {text-align:center;}
+  p {text-align:center;}
+  h3{margin-left: 25%;color:white;margin-top: 5%;}
+input{margin-left: 25%;}
+  button {
+    width: 15%;
+    margin-left: 42%;
+  }
+  .container{
+    margin-top: 3%;
+    border: 2px solid lightsalmon;
+    width:50%;
+  }
+</style>
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">QUIZ--NATION :></a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li ><a href="#">Home</a></li>
+          </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ><a href="signup.html" id="name" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+<br><br><br>
+
+<div class="container">
+    <h1  style="margin-left:35%;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;color:slategrey; text-decoration: none;">Login Details</h1>
+    <form >
+        <h3>Enter Username</h3>
+        <input style="width: 50%;" id="username" name="username" type="text" placeholder="username" class="form-control" style="width: 40%;" >
+        <h3>Enter Password</h3>
+        <input style="margin-bottom:5%;width: 50%;" id="password" name="password" type="password" placeholder="password" class="form-control" style="width: 40%;">
+    </form>
+</div>
+<script src="login.js" type="text/javascript"></script>
+<button style="margin-top: 1%;margin-bottom: 1%;" id="login" class="btn btn-success" role="button" onclick="login()">Login</button><br>
+<h7 style="color: purple;margin-left: 48.5%;">--or--</h7><br>
+<button style="margin-top: 1%;background-color:pink;"id="signup" class="btn btn-success" role="button" onclick="signup()">Signup</button>
+
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+  
+</html>
