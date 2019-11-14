@@ -1,4 +1,4 @@
-var ProdArray=[];
+var QuesArray=[];
 var QuesID=0;
 var currentId=0;
 var temp=1;
@@ -31,7 +31,7 @@ function createNewProductPanel()
   var div1=document.createElement("div");
   div1.setAttribute("id","div1");
   var Qtitle=document.createElement("input");
-  Qtitle.setAttribute("id","Question Title");
+  Qtitle.setAttribute("id","Qtitle");
   Qtitle.setAttribute("placeholder","QUES. TITLE");
  
   
@@ -43,7 +43,7 @@ function createNewProductPanel()
   var div2=document.createElement("div");
   div2.setAttribute("id","div2");
   var Marks=document.createElement("textarea");
-  Marks.setAttribute("id","");
+  Marks.setAttribute("id","Marks");
   Marks.setAttribute("placeholder","MARKS");
   div2.appendChild(Marks);
   insertBlankLine(div2);
@@ -112,6 +112,8 @@ submitButton.addEventListener("click",function()
    else
    alert("All fields required......");
 });
+/*************************************************************************************************** */
+/*************************************************************************************************** */
 
 var cancelButton=document.createElement("button");
 cancelButton.setAttribute("id","cancelButton");
@@ -153,6 +155,7 @@ divAddProduct.append(div4);
 divAddProduct.append(div5);
 divAddProduct.append(div6);
 divAddProduct.append(div7);
+divAddProduct.append(div8);
 }
 }
 
@@ -170,9 +173,9 @@ function validation()
   var option1=document.getElementById("Option1").value;
   var option2=document.getElementById("Option2").value;
   var option3 = document.getElementById("Option3").value;
-  var optoin4 = document.getElementById("Optoin4").value;
+  var option4 = document.getElementById("Option4").value;
   var ans  =  document.getElementById("Ans").value;
-  if(qtitle == ""||marks == ""||option1 == ""||option2==""||option3==""||optoin4==""||ans==""){
+  if(qtitle == ""||marks == ""||option1 == ""||option2==""||option3==""||option4==""||ans==""){
   return false;}
   else
   return true;
@@ -182,21 +185,19 @@ function validation()
 function addProducttoArray()
 {
   var QuesObject={// ProdObject={
-  QuesID:ProdId,
+  Quesid:QuesID,
   Qtitle:document.getElementById("Qtitle").value,
   Marks:document.getElementById("Marks").value,
   Option1:document.getElementById("Option1").value,
   Option2:document.getElementById("Option2").value,
   Option3 :document.getElementById("Option3").value,
-  Optoin4:document.getElementById("Optoin4").value,
+  Option4:document.getElementById("Option4").value,
   Ans: document.getElementById("Ans").value,
   }
   QuesArray.push(QuesObject);
-  storeProducts(ProdArray);
-
- addProducttoDOM(QuesObject,1);
-
+  storeProducts(QuesArray);
   clearPannel();
+  addProducttoDOM(QuesObject,1);  
   QuesID++;
   console.log(JSON.stringify(QuesArray));
 }
@@ -213,6 +214,7 @@ divAddProduct.removeChild(div4);
 divAddProduct.removeChild(div5);
 divAddProduct.removeChild(div6);
 divAddProduct.removeChild(div7);
+divAddProduct.removeChild(div8);
 aAddProduct.setAttribute("style","visibility:visible; inline-size: 200px; margin-left: 40%;");
 }
 
@@ -227,25 +229,26 @@ var Option2 = ProdObj.Option2;
 var Option3 = ProdObj.Option3;
 var Option4 = ProdObj.Option4;
 var Ans = ProdObj.Ans;
-var Qid=ProdObj.QuesID;
+var Qid=ProdObj.Quesid;
  if(flag2==1)
  Qid = Qid+1;
+ console.log(Qid);
 
 var qtitle=document.createElement("h2");
 var marks=document.createElement("h4");
 var option1=document.createElement("h4");
 var option2=document.createElement("h4");
 var option3 = document.createElement("h4");
-var optoin4 = document.createElement("h4");
+var option4 = document.createElement("h4");
 var ans  =  document.createElement("h4");
 
-qtitle.innerHTML=Qid+"# Question: "+Qtitle;
+qtitle.innerHTML=""+Qid+"# Question: "+Qtitle;
 marks.innerHTML="Marks : "+Marks;
-option1.innerHTML="Option1: "+option1;
-option2.innerHTML="o2: "+option2;
-option3.innerHTML="o3: "+option3;
-optoin4.innerHTML = "o4: "+optoin4;
-ans.innerHTML = "Answer :"+ans;
+option1.innerHTML="Option1: "+Option1;
+option2.innerHTML="Option2: "+Option2;
+option3.innerHTML="Option3: "+Option3;
+option4.innerHTML = "Option4: "+Option4;
+ans.innerHTML = "Answer :"+Ans;
 
 var editButton=document.createElement("button");
 editButton.setAttribute("id","editButton");
@@ -266,7 +269,7 @@ listdiv1.append(marks);
 listdiv1.append(option1);
 listdiv1.append(option2);
 listdiv1.append(option3);
-listdiv1.append(optoin4);
+listdiv1.append(option4);
 
 listdiv1.append(ans);
 
@@ -283,14 +286,12 @@ divListProducts.append(listdiv1);
 console.log(QuesArray);
 
 editButton.addEventListener("click",function(){
-editFunction(prodName,prodDesc,prodprice,prodquan,ProdObj);
+editFunction(QuesArray[(QuesArray.length)-1]); // Seding Object of Questions
 });
 
 deleteButton.addEventListener("click",function(){
-  
   deleteFunction(ProdObj);
  // deleteFromDataBase(ProdObj);
-
 });
 }
 
@@ -304,20 +305,27 @@ function removeFromProductsArray(id)
 
 //*******************insert into fields during edit function*********** */
 
-function insertIntoFields(prodName,prodDesc,prodprice,prodquan)
+function insertIntoFields(QuesObject)
 {
-  var name=document.getElementById("ProdName");
-  var desc=document.getElementById("ProdDesc");
-  var price=document.getElementById("ProdPrice");
-  var quantity=document.getElementById("ProdQuan");
-  name.value=prodName;
-  desc.value=prodDesc;
-  price.value=prodprice;
-  quantity.value=prodquan;
+  var qtitle=document.getElementById("Qtitle");
+  var marks=document.getElementById("Marks");
+  var option1=document.getElementById("Option1");
+  var option2=document.getElementById("Option2");
+  var option3 = document.getElementById("Option3");
+  var optoin4 = document.getElementById("Option3");
+  var ans = document.getElementById("Option3");
+  
+  qtitle.value = QuesObject.Qtitle;
+  marks.value = QuesObject.Marks;
+  option1.value = QuesObject.Option1;
+  option2.value = QuesObject.Option2;
+  option3.value = QuesObject.Option3;
+  option4.value = QuesObject.Option4;
+  ans.value = QuesObject.Ans;
 }
 
 
-function updateDom(ProdObj)
+function updateDom(QuesObject)
 {
  var listdiv1=document.createElement("div");
 var prodName=ProdObj.Prodname;
@@ -367,7 +375,7 @@ insertBlankLine(listdiv1);
 divListProducts.append(listdiv1);
  editParent.parentNode.replaceChild(listdiv1,editParent);
   editButton.addEventListener("click",function(){
-  editFunction(prodName,prodDesc,prodprice,ProdObj);
+  editFunction(QuesObject);
   });
   deleteButton.addEventListener("click",function(){
   deleteFunction(ProdObj);
@@ -402,11 +410,8 @@ function replaceInArray(newObj)
 
 //*********local storage functions**************** */
 
-function storeProducts(ProdArray)
+function storeProducts(QuesArray)
 {
-/*console.log(ProdArray);
-localStorage.adminproducts=JSON.stringify(ProdArray);*/
-
 var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -415,12 +420,8 @@ var xhttp = new XMLHttpRequest();
   };
   xhttp.open("POST", "/array", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("productList="+JSON.stringify(ProdArray));
+  xhttp.send("productList="+JSON.stringify(QuesArray));
 }
-
-
-
-
 
 function getStoredProducts()
 {
@@ -461,7 +462,7 @@ for(i=0;i<ProdArray.length;i++)
 
 
 
-function editFunction(prodName,prodDesc,prodprice,prodquan,ProdObj)
+function editFunction(QuesObject)
 {
   editParent=event.target.parentNode;
   createNewProductPanel();
@@ -469,20 +470,18 @@ function editFunction(prodName,prodDesc,prodprice,prodquan,ProdObj)
   document.getElementById("submitButton").setAttribute("style","visibility:hidden");
   document.getElementById("cancelButton").setAttribute("style","visibility:hidden");
   document.getElementById("saveButton").setAttribute("style","visibility:visible");
-  insertIntoFields(prodName,prodDesc,prodprice,prodquan);
-  currentId=ProdObj.Prodid;
+  insertIntoFields(QuesObject)
+  currentId=QuesObject.Qid;
 }
 
 
-function deleteFunction(ProdObj)
+function deleteFunction(QuesObject)
 {
   targetParent = event.target.parentNode;
-  console.log(ProdObj.Prodid);
-  removeFromProductsArray(getProductIndex(ProdObj.Prodid));
-  deleteFromDataBase(ProdObj.Prodname);
+  console.log(QuesObject.Qid);
+  removeFromProductsArray(getProductIndex(QuesObject.Qid));
+  deleteFromDataBase(QuesObject.Qtitle);
   targetParent.parentNode.removeChild(targetParent);
-  
-  
 }
 //********************************************json******************************************
 /*var xhttp = new XMLHttpRequest();
@@ -548,18 +547,17 @@ function loggedIn()
  
 }
 
-function deleteFromDataBase(Prodname){
-  console.log("product to be deleted is with id----"+Prodname)
+function deleteFromDataBase(Qtitle){
+  console.log("product to be deleted is with id"+Qtitle)
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-   
   }
 };
 xhttp.open("POST", "/delete", true);
 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-xhttp.send("Prodname="+JSON.stringify(Prodname));
+xhttp.send("Prodname="+JSON.stringify(Qtitle));
 }
 
 function updateDatabase(obj){
